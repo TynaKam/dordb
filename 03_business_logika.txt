@@ -1,0 +1,12 @@
+Vyvorení receptu
+
+Název: create_recipe
+Parametry: NAME, DESCRIPTION, PREPARATION, ID_APP_USER
+Popis: Procedura vytvorí nový záznam v tabulce Recipe. Ingredience budou svázány s již existujícími záznamy v databázi v tabulce RecipeIngredient. Hodnoty RATE_COUNT a RATING jsou pri vytvorení nového záznamu nastaveny na 0. Do ID_APP_USER je naplneno ID uživatele, který daný recept vytvoril.
+
+
+Registrace nového uživatele
+
+Název: creare_user
+Parametry: USERNAME, PASSWORD, NAME, SURNAME, EMAIL
+Popis: Procedura vytvorí nový záznam v tabulce AppUser. ID_ROLE je svázáno se záznamem dané role v databázi v tabulce Role. RATING je pri vytvorení nastaven na 0.
