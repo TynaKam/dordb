@@ -1,5 +1,3 @@
-A) Triviální integritní omezení
-
 Tabulka Role
 Atribut ROLE_NAME nesmí být nulový.
 
@@ -27,4 +25,4 @@ Atribut PREPARATION nesmí být nulový.
 Atribut ID_APP_USER nesmí být nulový.
 
 
-B) Netriviální integritní omezení
+TODO: Pro tabulku category
