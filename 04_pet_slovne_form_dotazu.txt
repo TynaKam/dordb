@@ -1,0 +1,5 @@
+1. Seznam všech receptu, které obsahují množinu vybraných ingrediencí.
+2. Seznam všech receptu z dané kategorie serazených podle hodnocení.
+3. Seznam uživatelu podle hodnocení.
+4. Recepty daného uživatele podle hodnocení.
+5. Seznam zákazníku (login, jméno, príjmení, hodnocení a pocet nahraných receptu)
