@@ -1,0 +1,30 @@
+A) Triviální integritní omezení
+
+Tabulka Role
+Atribut ROLE_NAME nesmí být nulový.
+
+Tabulka AppUserRole
+Atribut ID_APP_USER nesmí být nulový.
+Atribut ID_ROLE nesmí být nulový.
+
+AppUser
+Atribut USERNAME nesmí být nulový a unikátní - zajišteno unikátním klícem.
+Atribut PASSWORD nesmí být nulový.
+Atribut RATING nesmí být záporné císlo.
+
+Tabulka Ingredient
+Atribut INGREDIENT_NAME nesmí být nulový a unikátní - zajišteno unikátním klícem. 
+
+Tabulka RecipeIngredient
+Atribut ID_RECIPE a ID_INGREDIENT nesmí být nulový.
+Atribut AMOUT a UNIT musí být vetší než 0.
+
+Tabulka Recipe
+Atribut NAME nesmí být nulový.
+Atribut RATING se pohybuje v rozsahu od 0 do 5.
+Atribut RATE_COUNT nesmí být záporné císlo.
+Atribut PREPARATION nesmí být nulový.
+Atribut ID_APP_USER nesmí být nulový.
+
+
+B) Netriviální integritní omezení
