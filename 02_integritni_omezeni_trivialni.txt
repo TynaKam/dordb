@@ -1,5 +1,5 @@
 Tabulka Role
-Atribut ROLE_NAME nesmí být nulový.
+Atribut ROLE_NAME nesmí být nulový a je unikátní.
 
 Tabulka AppUserRole
 Atribut ID_APP_USER nesmí být nulový.
