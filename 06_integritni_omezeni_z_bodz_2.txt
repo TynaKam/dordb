@@ -1,0 +1,12 @@
+--AppUser
+--Atribut RATING nesmí být záporné císlo.
+alter table APPUSER add constraint CHECK_RATING check(RATING >= 0 AND RATING <= 5) ENABLE;
+--Tabulka RecipeIngredient
+--Atribut AMOUT musí být vetší než 0.
+alter table RECIPE_INGREDIENT add constraint CHECK_RECIPE_INGREDIENT_AMOUT check(AMOUT > 0) ENABLE;
+
+
+--Tabulka Recipe
+--Atribut RATING se pohybuje v rozsahu od 0 do 5.
+--Atribut RATE_COUNT nesmí být záporné císlo.
+alter table RECIPE add constraint CHECK_RATE_AMOUT_AND_RATING check(RATING >= 0 AND RATING <= 5 AND RATE_COUNT >= 0) ENABLE;

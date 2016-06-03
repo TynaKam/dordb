@@ -16,7 +16,7 @@ Atribut UNITS nesmí být nulový.
 
 Tabulka RecipeIngredient
 Atribut ID_RECIPE a ID_INGREDIENT nesmí být nulový.
-Atribut AMOUT a UNIT musí být vetší než 0.
+Atribut AMOUT musí být vetší než 0.
 
 Tabulka Recipe
 Atribut NAME nesmí být nulový.
@@ -25,5 +25,8 @@ Atribut RATE_COUNT nesmí být záporné císlo.
 Atribut PREPARATION nesmí být nulový.
 Atribut ID_APP_USER nesmí být nulový.
 
+Tabulka Category
+Atribut ID_CATEGORY nesmí být nulový.
 
-TODO: Pro tabulku category
+Tabulka RecipeCategory
+Atributy ID_RECIPE a ID_CATEGORY nesmí být nulové.

@@ -1,0 +1,41 @@
+--1. Seznam všech receptu(nazev,popis), které obsahují množinu vybraných ingrediencí.
+
+SELECT 
+r.NAME AS "Recipe name", 
+r.DESCRIPTION as "Description"
+FROM RECIPE r
+inner join RECIPE_INGREDIENT ri
+on r.ID_RECIPE =  ri.ID_RECIPE
+inner join INGREDIENT i
+on i.ID_INGREDIENT = ri.ID_INGREDIENT
+where i.INGREDIENT_NAME = 'sapien.' OR i.INGREDIENT_NAME = 'lorem semper' OR  i.INGREDIENT_NAME = 'sit' OR i.INGREDIENT_NAME = 'pede blandit'
+order by r.rating
+DESC;
+
+
+--2. Seznam všech receptu z dané kategorie serazených podle hodnocení.
+SELECT 
+r.NAME AS "Recipe name", 
+c.category_name as "Category name",
+r.rating as "Rating"
+FROM RECIPE r
+inner join RECIPE_CATEGORY rc
+on r.ID_RECIPE =  rc.ID_RECIPE
+inner join CATEGORY c
+on rc.ID_CATEGORY = c.ID_CATEGORY
+where c.CATEGORY_NAME = 'Soup'
+order by r.rating
+DESC;
+
+--3. Seznam 50 uživatelu podle hodnocení a jejich nejcasteji hodnocený recept
+
+select u.username as "Login", u.name as "Name", u.surname as "Surname", r.name as "Recipe name"
+from Appuser u 
+inner join(
+select MAX(rating) rating from Recipe r)
+on
+u.ID_APP_USER = r.ID_APP_USER;
+
+
+--4. Recepty daného uživatele podle hodnocení 
+--5. Seznam zákazníku (login, jméno, príjmení, hodnocení a pocet nahraných receptu)
