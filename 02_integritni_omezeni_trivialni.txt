@@ -12,6 +12,7 @@ Atribut RATING nesmí být záporné císlo.
 
 Tabulka Ingredient
 Atribut INGREDIENT_NAME nesmí být nulový a unikátní - zajišteno unikátním klícem. 
+Atribut UNITS nesmí být nulový.
 
 Tabulka RecipeIngredient
 Atribut ID_RECIPE a ID_INGREDIENT nesmí být nulový.
