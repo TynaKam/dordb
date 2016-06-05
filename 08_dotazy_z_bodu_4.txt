@@ -29,13 +29,18 @@ DESC;
 
 --3. Seznam 50 uživatelu podle hodnocení a jejich nejcasteji hodnocený recept
 
-select u.username as "Login", u.name as "Name", u.surname as "Surname", r.name as "Recipe name"
-from Appuser u 
-inner join(
-select MAX(rating) rating from Recipe r)
-on
-u.ID_APP_USER = r.ID_APP_USER;
 
 
---4. Recepty daného uživatele podle hodnocení 
---5. Seznam zákazníku (login, jméno, príjmení, hodnocení a pocet nahraných receptu)
+--4. Recepty daného uživatele podle hodnocení.
+select a.USERNAME as Username, r.rating as Rating, r.DESCRIPTION as Description from Recipe r
+join APPUSER a on
+r.ID_APP_USER = a.ID_APP_USER
+where  a.USERNAME = 'sit'
+order by r.RATING desc;
+--5. Seznam zákazníku (login, jméno, príjmení, hodnocení a pocet nahraných receptu) serezených podle hodnocení
+select a.username as Username, a.name as Name, a.surname as Surname, a.rating as Rating, re.recipe_count as Recipe_count from
+Appuser a
+join ( select count(r.name) as recipe_count, id_app_user from Recipe r
+group by id_app_user)  re on
+a.ID_APP_USER = re.id_app_user
+order by a.RATING desc;
