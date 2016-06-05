@@ -28,7 +28,21 @@ order by r.rating
 DESC;
 
 --3. Seznam 50 uživatelu podle hodnocení a jejich nejcasteji hodnocený recept
-
+ 
+select * from (
+  select
+    u.id_app_user,
+    u.username,
+    (u.name || ' ' || u.surname) as user_name,
+    mrecipe.name as recipe_name,
+    rate_count,
+    id_recipe
+  from
+    (select re.id_recipe, re.name, re.id_app_user, rate_count, max(re.rate_count) over (partition by re.id_app_user) as max_rate from recipe re) mrecipe
+    join appuser u on u.id_app_user = mrecipe.id_app_user
+  where rate_count = max_rate
+  order by rate_count desc
+) where rownum <= 50
 
 
 --4. Recepty daného uživatele podle hodnocení.

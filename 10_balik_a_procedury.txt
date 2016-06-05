@@ -1,0 +1,19 @@
+create or replace PACKAGE recepty AS
+   PROCEDURE create_recipe (name IN VARCHAR, description IN VARCHAR,  id_app_user IN NUMBER, preparation IN VARCHAR);
+   PROCEDURE create_user (username in varchar, pass in varchar, name1 in varchar, surname in varchar, email in varchar);
+END recepty;
+
+/
+create or replace PACKAGE BODY recepty AS
+  PROCEDURE create_recipe (name IN VARCHAR, description IN VARCHAR,  id_app_user IN NUMBER, preparation IN VARCHAR) AS
+    BEGIN  
+     INSERT INTO Recipe VALUES (seq_recipe.nextval, name, 0, description, id_app_user, preparation, 0);
+  END create_recipe;
+  
+  PROCEDURE create_user (username in varchar, pass in varchar, name1 in varchar, surname in varchar, email in varchar) AS 
+    BEGIN  
+      INSERT INTO Appuser VALUES (seq_appuser.nextval, username, pass, name1, surname, email, 0);
+  END create_user; 
+  
+END recepty;
+/
