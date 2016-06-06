@@ -1,0 +1,14 @@
+--AppUser
+--Atribut RATING musí být od 0 do 5.
+insert into appuser values(seq_appuser.nextval, 'Vláda01', 'Dfgrg6rvrv','Vladimir','Novák','vlada@gmail.cz','-6')
+
+--Tabulka RecipeIngredient
+--Atribut AMOUT musí být vetší než 0.
+inser into recipeingredient values(seq_recipeingredient.nextval, 2, 4, 0);
+
+--Tabulka Recipe
+--Atribut RATING se pohybuje v rozsahu od 0 do 5.
+--Atribut RATE_COUNT nesmí být záporné císlo.
+
+insert into recipe values(seq_recipe.nextval, 'Nazev',-5, 'Popis receptu', 3, 'Preparation', -5);
+

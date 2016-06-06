@@ -1,0 +1,25 @@
+--AppUser
+--Atribut RATING musí být od 0 do 5.
+insert into appuser values(seq_appuser.nextval, 'Vláda01', 'Dfgrg6rvrv','Vladimir','Novák','vlada@gmail.cz','-6',0)
+Error report -
+SQL Error: ORA-02290: check constraint (DOKAMENKR1.CHECK_RATING) violated
+02290. 00000 -  "check constraint (%s.%s) violated"
+
+
+--Tabulka RecipeIngredient
+--Atribut AMOUT musí být vetší než 0.
+insert into recipe_ingredient values(seq_recipe_ingredient.nextval, 2, 4, 0)
+Error report -
+SQL Error: ORA-02290: check constraint (DOKAMENKR1.CHECK_RECIPE_INGREDIENT_AMOUT) violated
+02290. 00000 -  "check constraint (%s.%s) violated"
+
+
+--Tabulka Recipe
+--Atribut RATING se pohybuje v rozsahu od 0 do 5.
+--Atribut RATE_COUNT nesmí být záporné císlo.
+
+insert into recipe values(seq_recipe.nextval, 'Nazev',-5, 'Popis receptu', 3, 'Preparation', -5)
+Error report -
+SQL Error: ORA-02290: check constraint (DOKAMENKR1.CHECK_RATE_AMOUT_AND_RATING) violated
+02290. 00000 -  "check constraint (%s.%s) violated"
+*Cause:    The values being inserted do not satisfy the named check
