@@ -1,0 +1,21 @@
+-- Create recipe
+select * from Recipe where ID_RECIPE = (select max(ID_RECIPE) from Recipe) + 1;
+/
+begin
+RECEPTY.CREATE_RECIPE('Name','Desc', 20, 'Prep');
+end;
+/
+select * from Recipe where ID_RECIPE = (select max(ID_RECIPE) from Recipe);
+
+
+select * from Appuser where ID_APP_USER = (select max(ID_APP_USER) from Appuser) + 1;
+/
+begin
+RECEPTY.CREATE_USER('Username','Pass','Name','Surname','email');
+end;
+/
+
+select * from Appuser where ID_APP_USER = (select max(ID_APP_USER) from Appuser);
+
+
+ 

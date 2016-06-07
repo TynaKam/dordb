@@ -1,0 +1,13 @@
+-- Skript, který doplní do zvolené tabulky schématu sloupec, který bude obsahovat odvozené
+-- hodnoty (prùmìrný plat zamìstnance v rámci oddìlní apod.) – tyto hodnoty budou
+-- automaticky aktualizovány pomocí triggerù
+
+alter table appuser add (avg_recipe_rating float);
+
+create or replace trigger avg_rating_trig
+after insert on recipe for each row
+begin
+  update appuser u set avg_recipe_rating = (
+   select avg(rating) from recipe r where r.id_app_user = u.id_app_user group by  r.id_app_user
+  );
+end;

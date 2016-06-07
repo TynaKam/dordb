@@ -1,0 +1,106 @@
+-- Skript, který vytvoøí úložištì ještì jednou v „objektové“ podobì:
+-- ? místo relaèních tabulek budou použity uživatelsky definované typy Object a
+-- objektové tabulky (s jinými názvy než v dosavadním modelu)
+-- ? objektové tabulky budou naplnìny importem z pùvodních relaèních tabulek
+-- ? datové cizí klíèe budou nahrazeny referencemi na objekt
+
+CREATE or replace type T_ROLE as object (
+ID_ROLE 	number, 
+ROLE_NAME 	VARCHAR2(50)
+);
+
+CREATE or replace type T_APPUSER as object
+(
+ID_APP_USER 	NUMBER,
+USERNAME 	VARCHAR2(50),
+PASSWORD 	VARCHAR2(256),
+NAME 		VARCHAR2(50),
+SURNAME 	VARCHAR2(50),
+EMAIL 		VARCHAR2(50),
+RATING 		VARCHAR2(20)
+);
+
+CREATE or replace type T_APPUSERROLE as object
+(
+ID_APP_USER_ROLE 	NUMBER,
+APP_USER_REF ref T_appuser,
+ROLE_ref ref T_role
+);
+
+CREATE or replace type T_INGREDIENT as object
+(
+ID_INGREDIENT 	NUMBER,
+INGREDIENT_NAME VARCHAR2(50),
+UNIT VARCHAR2(50 BYTE)
+);
+
+CREATE or replace type T_RECIPE as object
+(
+ID_RECIPE 		NUMBER, 
+NAME 			VARCHAR2(100),
+RATE_COUNT		number,
+RATING			FLOAT,
+DESCRIPTION 		VARCHAR2(500),
+PREPARATION		varchar2(2000),
+APP_USER_REF ref T_appuser 
+);
+
+CREATE or replace type T_RECIPE_INGREDIENT as object
+(
+ID_RECIPE_INGREDIENT 	NUMBER,
+RECIPE_REF ref T_recipe,
+INGREDIENT_REF ref T_ingredient,
+AMOUNT FLOAT(126)
+);
+
+CREATE or replace type T_CATEGORY as object
+(
+  ID_CATEGORY NUMBER,
+  CATEGORY_NAME VARCHAR2(50)
+);
+
+CREATE or replace type T_RECIPE_CATEGORY as object
+(
+  ID_RECIPE_CATEGORY NUMBER, 
+  RECIPE_REF ref T_recipe, 
+  CATEGORY_REF ref T_CATEGORY
+);
+
+CREATE table OBJ_ROLE of T_ROLE;
+CREATE table OBJ_APPUSERROLE of T_APPUSERROLE;
+CREATE table OBJ_APPUSER of T_APPUSER;
+CREATE table OBJ_INGREDIENT of T_INGREDIENT;
+CREATE table OBJ_RECIPE_INGREDIENT of T_RECIPE_INGREDIENT;
+CREATE table OBJ_RECIPE of T_RECIPE;
+CREATE table OBJ_CATEGORY of T_CATEGORY;
+CREATE table OBJ_RECIPE_CATEGORY of T_RECIPE_CATEGORY;
+
+insert into obj_role select * from role;
+insert into obj_appuser select u.id_app_user, u.username, u.password, u.name, u.surname, u.email, u.rating from appuser u;
+insert into obj_appuserrole select 
+    aur.id_app_user_role, 
+    (select ref (u) from obj_appuser u where u.id_app_user = aur.id_app_user),
+    (select ref (r) from obj_role r where r.id_role = aur.id_role)
+  from appuserrole aur;
+insert into obj_ingredient select * from ingredient;
+insert into obj_recipe select
+  r.id_recipe,
+  r.name,
+  r.rate_count,
+  r.rating,
+  r.description,
+  r.preparation,
+  (select ref (u) from obj_appuser u where u.id_app_user = r.id_app_user)
+ from recipe r;
+insert into obj_recipe_ingredient select
+    ri.id_recipe_ingredient,
+    (select ref (r) from obj_recipe r where r.id_recipe = ri.id_recipe),
+    (select ref (i) from obj_ingredient i where i.id_ingredient = ri.id_ingredient),
+    ri.amout
+  from recipe_ingredient ri;
+insert into obj_category select * from category;
+insert into obj_recipe_category select
+    rc.id_recipe_category,
+    (select ref (r) from obj_recipe r where r.id_recipe = rc.id_recipe),
+    (select ref (ca) from obj_category ca where ca.id_category = rc.id_category)
+  from recipe_category rc;

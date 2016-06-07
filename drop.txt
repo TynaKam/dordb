@@ -1,0 +1,41 @@
+--DROP SEQUENCES
+drop SEQUENCE SEQ_APPUSER;
+drop SEQUENCE SEQ_APPUSERROLE;
+drop SEQUENCE SEQ_CATEGORY;
+drop SEQUENCE SEQ_INGREDIENT;
+drop SEQUENCE SEQ_RECIPE;
+drop SEQUENCE SEQ_RECIPE_CATEGORY;
+drop SEQUENCE SEQ_RECIPE_INGREDIENT;
+drop SEQUENCE SEQ_ROLE;
+
+-- DROP TABLES
+drop table recipe_ingredient;
+drop table appuserrole;
+drop table recipe_category;
+drop table appuser;
+drop table recipe;
+drop table ingredient;
+drop table category;
+drop table role;
+
+drop table obj_recipe_ctegory;
+drop table obj_appuserrole;
+drop table obj_recipe_category;
+drop table obj_appuser;
+drop table obj_recipe;
+drop table obj_ingredient;
+drop table obj_category;
+drop table obj_role;
+
+drop PACKAGE recepty;
+
+drop TRIGGER AVG_RATING_TRIG;
+
+drop TYPE T_recipe_ingredient;
+drop TYPE T_appuserrole;
+drop TYPE T_recipe_category;
+drop TYPE T_appuser;
+drop TYPE T_recipe;
+drop TYPE T_ingredient;
+drop TYPE T_category;
+drop TYPE T_role;

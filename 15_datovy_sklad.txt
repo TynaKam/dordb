@@ -1,0 +1,10 @@
+Fakta - Recipe
+Dimenze - Ingredient, Appuser, Category
+
+Dotazy pro analýzu - 
+Nejcasteji používané suroviny ve vyhledávaných receptech.
+Skladba potvravin nejlépe hodnocených receptu.
+Kategorie, které je z od uživatelu nejvíceh hodnoceny.
+
+
+

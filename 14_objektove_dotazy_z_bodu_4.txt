@@ -1,0 +1,50 @@
+--1. Seznam všech receptu(nazev,popis), které obsahují množinu vybraných ingrediencí.
+select
+  ri.recipe_ref.name as Recipe_name, ri.recipe_ref.description
+from obj_recipe_ingredient ri
+where ri.ingredient_ref.ingredient_name in('sapien', 'lorem semper', 'sit', 'pede blandit')
+order by ri.recipe_ref.rating desc;
+
+--2. Seznam všech receptu z dané kategorie serazených podle hodnocení.
+select
+  rc.recipe_ref.name as Recipe_name,
+  rc.category_ref.category_name,
+  rc.recipe_ref.rating
+from
+  obj_recipe_category rc
+where
+  rc.category_ref.category_name = 'Soup'
+order by rc.recipe_ref.rating desc;
+
+--3. Seznam 50 uživatelu podle hodnocení a jejich nejcasteji hodnocený recept
+select * from
+(select
+  distinct(r.app_user_ref.id_app_user) as id_app_user,
+  r.app_user_ref.username as username,
+  (r.app_user_ref.name || ' ' || r.app_user_ref.surname) as user_name,
+  r.name,
+  r.rate_count,
+  max(r.rate_count) over (partition by r.app_user_ref.id_app_user) as max_rate,
+  r.id_recipe
+from obj_recipe r
+order by r.rate_count desc)
+where rownum <= 50;
+
+--4. Recepty daného uživatele podle hodnocení.
+select
+  r.app_user_ref.username as username,
+  r.rating,
+  r.description
+from obj_recipe r
+where r.app_user_ref.username = 'sit'
+order by r.rating desc;
+
+--5. Seznam zákazníku (login, jméno, príjmení, hodnocení a pocet nahraných receptu) serezených podle hodnocení
+select 
+  r.app_user_ref.username as username,
+  r.app_user_ref.name as name,
+  r.app_user_ref.surname as surname,
+  r.app_user_ref.rating as rating,
+  count(r.id_recipe) over (partition by r.app_user_ref.id_app_user) as recipe_count
+from obj_recipe r
+order by r.app_user_ref.rating desc;
